@@ -1,15 +1,23 @@
 import Login from './components/Login'
+import Search from './components/Search'
+import { useState } from 'react'
 import './styles/styles.css'
-import Swup from 'swup'
 
 function App() {
 
-  const swup = new Swup()
+  const [login, setLogin] = useState(false)
+
+  const userLogin = () => {
+    setLogin(true)
+  }
 
   return (
-    <div className='app'>
-     <Login />
-    </div>
+
+    <main className="app">
+      {!login && <Login userLogin={userLogin}/>}
+      {login && <Search />}
+      <button className='test-button' onClick={userLogin}>Test</button>
+    </main>
   )
 }
 

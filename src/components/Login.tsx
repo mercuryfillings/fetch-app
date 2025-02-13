@@ -12,22 +12,13 @@ const Login = () => {
     myHeaders.append("Content-Type", "application/json");
 
     //event handlers
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
         setFormData(prevData => ({
           ...prevData,
-          [name]: type === 'checkbox' ? checked : value
+          [name]: value
         }));
       };
-
-    // const handleName = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setName(e.target.value)
-    // }
-
-    // const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setEmail(e.target.value)
-    // }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -39,7 +30,8 @@ const Login = () => {
             const response = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
                 method: "POST",
                 headers: myHeaders,
-                body: JSON.stringify({...formData})
+                body: JSON.stringify({...formData}),
+                credentials: "include"
               });
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
@@ -59,28 +51,27 @@ const Login = () => {
     const disabled = !regex.test(formData.email)
 
     return (
-        <div className='login-group'>
-            <h1>Please Log In</h1>
-            <form className='form-group' onSubmit={handleSubmit}>
-                <div>
+        <div className='login-form-container'>
+            <label className='login-label'>Please Log In</label>
+            <form name='login-form' id='login-form' className='form' onSubmit={handleSubmit}>
+                <div className='login-field-container'>
                     <input 
                     name="name"
                     className='form-field' 
                     type='text' 
                     placeholder='Your Full Name'
                     value={formData.name || ''}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     />
-                    {/* onChange={handleName}  */}
                 </div>
-                <div className='validation-group'>
+                <div className='login-validation-container'>
                     <input 
                     name='email' 
                     className="form-field" 
                     type='email' 
                     placeholder='Email Address' 
                     value={formData.email || ''}
-                    onChange={handleInputChange} 
+                    onChange={handleChange} 
                     />
                     {disabled && formData.email !== '' && <label className='warning-text' htmlFor='email'>Enter a valid email address</label>}
                 </div>

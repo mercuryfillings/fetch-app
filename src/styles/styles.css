@@ -1,12 +1,12 @@
-/* swup transitions */
-
-html.is-changing .transition-fade {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-html.is-animating .transition-fade {
-  opacity: 1;
+/* Variables */
+:root {
+  --sans-font: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  --serif-font: 'Cambria, Cochin, Georgia, Times, Times New Roman', serif;
+  --dodger-blue: #0A99FF;
+  --lime-green: #60D037;
+  --xanthous: #F7B53B;
+  --raspberry: #D81159;
+  --footer-text: rgb(169, 169, 169);
 }
 
 /* Header Styles */
@@ -18,75 +18,191 @@ html.is-animating .transition-fade {
   width: auto;
   background-color: white;
   justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+  max-height: 120px;
 }
 
-.logo {
-  margin: calc(5px + 1vw);
+.header-logo-container {
+  flex: 3;
 } 
 
-.nav-elements {
+.nav-container {
   display: flex;
-  justify-content: space-evenly;
+  flex: 1;
+  align-items: center;
 }
 
-.nav-element {
-  margin: calc(5px + 1vw);
+.nav-list {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.nav-list-item {
+  margin: 1rem;
+}
+
+.nav-link {
+  color: black;
+  font-size: 1rem;
+  font-family: var(--sans-font);
+  text-decoration: none;
+  border-bottom: 0px solid black;
+  transition: .2s;
+}
+
+.nav-link:hover {
+  border-bottom: 3px solid black;
+  padding-bottom: 3px;
 }
 
 /* Footer Styles */
+
+.footer-container {
+  display: flex;
+  width: auto;
+  background: black;
+  padding: calc(20px + 2vw);
+  min-height: 25vh;
+}
+
+.footer-logo-container {
+  flex: 2;
+  align-self: center;
+}
+
+.footer-text-container {
+  flex: 3;
+  display: flex;
+  align-items: center;
+}
+
+.footer-text-spacer {
+  flex: 1;
+}
+
+.footer-text {
+  color: white;
+  font-family: var(--sans-font);
+  line-height: 1.5rem;
+  color: var(--footer-text);
+}
 
 /* App Styles */
 
 .app {
   display: flex;
-  justify-content: center;
-  padding: calc(5px + 1vw);
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 55vh;
+  background: none;
 }
 
 /* Form & Input Styles */
 
-input:invalid {
-  border: red solid 3px;
+input {
+  transition: .2s;
 }
 
-.login-group {
+/* input:invalid {
+  border-bottom: var(--raspberry) solid 3px;
+} */
+
+.login-label {
+  font-family: var(--serif-font);
+  font-size: 3rem;
+  margin: calc(5px + 2vw);
+}
+
+.login-form-container {
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 5px;
 }
 
 .login-button {
-  background-color: green;
-  padding: 5px;
+  width: 100%;
+  height: 6vh;
+  margin: 1vw 0;
+  background-color: var(--lime-green);
   border-radius: 5px;
-  color: black;
+  padding: 5px;
+  border: none;
+  color: white;
+  font-family: var(--sans-font);
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  transition: .2s;
 }
 
 .login-button:disabled {
   background-color: gray;
+  color: white;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  align-items: center;
+.login-button:enabled:hover {
+  background-color: rgb(144, 232, 12);
 }
 
-.validation-group {
+.login-button:enabled:active {
+  background-color: #3e8e41;
+} 
+
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
+  /* background-color: orange; */
+}
+
+.login-field-container {
+  display: flex;
+  width: inherit;
+  margin: 2rem 0;
+  flex-direction: column;
+}
+
+.login-validation-container {
+  display: flex;
+  width:inherit;
+  margin: 2rem 0;
+  flex-direction: column;
 }
 
 .warning-text {
-  color: red;
+  color: var(--raspberry);
 }
 
 .form-field {
-  width: 200px;
+  font-family: var(--serif-font);
+  font-size: 1.5rem;
   padding: 5px;
-  border-radius: 5px;
+  background: white;
+  min-height: 40px;
   margin: 3px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+/* search styles */
+
+.search-container {
+  background: orange;
+  display: flex;
+  height: auto;
+  width: 100%;
+}
+
+.test-button {
+  width: 100px;
 }
