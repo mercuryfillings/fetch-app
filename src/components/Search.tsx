@@ -1,57 +1,59 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, FormEvent } from 'react'
+import { fetchBreeds, fetchContentByBreed } from '../helpers'
+import { SearchProps } from '../types'
+import AutoComplete from './Autocomplete'
 
-// type Props = {}
 
-export default function Search() {
 
-    const [input, setInput] = useState('')
-    const [breeds, setBreeds] = useState([])
 
-    const handleChange = (e) => {
-        setInput(e.target.value)
-    }
+const Search: React.FC<SearchProps> = (props) => {
 
-    const listBreeds = async () => {
-        try {
-            setBreeds(await getDogs())
-            console.log(breeds)
-        } catch(error) {
-            console.error(error)
-            throw Error
+    const [loading, setLoading] = useState<boolean>(true)
+    const [breeds, setBreeds] = useState<string[]>([])
+    const [selectedBreeds, setSelectedBreeds] = useState<string[]>([])
+    const [returnedBreedIds, setReturnedBreedIds] = useState<string[]>([])
+
+    const { updateDogIds } = props
+
+
+
+    const handleClick = async () => {
+        if (selectedBreeds.length === 0) {
+          console.warn("No breeds selected");
+          return;
         }
-        
+      
+        await fetchContentByBreed(selectedBreeds, setReturnedBreedIds);
+      
+      };
+
+    const fetchBreedsCallback = useCallback(() => {
+      fetchBreeds(setBreeds, setLoading);
+    }, []);
+
+    useEffect(() => {
+        fetchBreedsCallback()
+  }, [setBreeds, setLoading, fetchBreedsCallback])
+
+  useEffect(() => {
+    if (returnedBreedIds.length > 0) {
+      updateDogIds(returnedBreedIds);
     }
+  }, [returnedBreedIds, updateDogIds]);
+
     
-    const getDogs = async () => {
-        try {
-            const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/breeds/${input}`, {
-                method: "GET",
-                credentials: "include", 
-        })
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log(data);
-            return data
-    
-        } catch(error) {
-            console.error('Login failed:', error);
-            throw error;
-        }
-    }
   return (
-    <div className="search-page">
-        <div className="search-container">
-            <select className="search-select">
-                <option>One</option>
-                <option>Two</option>
-                <option>Three</option>
-                <option>Four</option>
-            </select>
-            <input type='search' onChange={handleChange}/>
-            <button onClick={listBreeds}>Test Get Dogs</button>
+    loading ? 
+    <p>loading</p>
+    :
+    <div className="search-container">
+        <h2 className="search-headline">Find a Dog for Adoption</h2>
+        <div className="search-interface-container">
+            <AutoComplete breeds={breeds} onSelectBreeds={setSelectedBreeds} />
+            <button className="form-button" onClick={handleClick}>Search</button>
         </div>
     </div>
   )
 }
+
+export default Search

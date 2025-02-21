@@ -14,7 +14,9 @@
 .header {
   display: flex;
   flex-direction: row;
-  padding: calc(5px + 1vw);
+  padding: calc(20px + 2vw);
+  padding-top: 2vh;
+  padding-bottom: 0;
   width: auto;
   background-color: white;
   justify-content: space-between;
@@ -70,7 +72,7 @@
 }
 
 .footer-logo-container {
-  flex: 2;
+  flex: 1.5;
   align-self: center;
 }
 
@@ -78,10 +80,16 @@
   flex: 3;
   display: flex;
   align-items: center;
+  padding: calc(20px + 2vw);
 }
 
 .footer-text-spacer {
-  flex: 1;
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans-font);
+  color: var(--footer-text)
 }
 
 .footer-text {
@@ -93,12 +101,16 @@
 
 /* App Styles */
 
-.app {
+.app-container {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 55vh;
+  flex-direction: row;
   background: none;
+}
+
+.app-content-container {
+  flex: 3;
+  display: flex;
+  min-height: 55vh;
 }
 
 /* Form & Input Styles */
@@ -128,7 +140,7 @@ input {
 
 .login-button {
   width: 100%;
-  height: 6vh;
+  height: 4rem;
   margin: 1vw 0;
   background-color: var(--lime-green);
   border-radius: 5px;
@@ -159,7 +171,6 @@ input {
   flex-direction: column;
   align-items: center;
   width: 400px;
-  /* background-color: orange; */
 }
 
 .login-field-container {
@@ -191,18 +202,204 @@ input {
   box-sizing: border-box;
   outline: none;
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 /* search styles */
 
 .search-container {
-  background: orange;
+  flex: 1;
   display: flex;
-  height: auto;
-  width: 100%;
+  padding: 2vw;
+  flex-direction: column;
+  min-height: 60vh;
+  /* border-right: 1px solid var(--footer-text); */
 }
 
-.test-button {
+.search-headline {
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  font-family: var(--serif-font);
+}
+
+.search-interface-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-field {
+  height: 5vh;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.search-menu {
+  height: 5vh;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.search-label {
+  font-family: var(--serif-font);
+}
+
+.form-button {
+  width: 100%;
+  height: 3rem;
+  margin: 1vw 0;
+  background-color: var(--dodger-blue);
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+  color: white;
+  font-family: var(--sans-font);
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  transition: .2s;
+}
+
+.form-button:hover {
+  background-color: rgb(28, 131, 215);
+}
+
+.form-button:active {
+  background-color: rgb(153, 200, 239);
+}
+
+.select-menu-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 20vh;
+}
+
+.search-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 20vh;
+}
+
+.checkbox-container {
+  flex: 3;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.checkbox-container-label {
+  flex: 3;
+}
+
+/* browse & image styles */
+
+.browse-page {
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+}
+
+.browse-headline {
+  flex: 1;
+  font-family: var(--serif-font);
+  font-size: 3rem;
+}
+
+.browse-container {
+  flex: 8;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.result-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.preview-image-container {
+  display: flex;
+  flex: 2;
+  overflow: hidden;
   width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  justify-content: center;
+}
+
+.preview-image {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.preview-info-container {
+  padding: 0 0 0 5px;
+  font-family: var(--sans-font);
+  font-size: 1rem;
+}
+
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* autocomplete styles */
+
+.autocomplete-list {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.autocomplete-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+  background: #f0f0f0;
+}
+
+.selected-breeds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.selected-breed {
+  display: inline-flex;
+  align-items: center;
+  background: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.selected-breed button {
+  margin-left: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }

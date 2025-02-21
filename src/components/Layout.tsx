@@ -1,12 +1,11 @@
-import { ReactNode, FC, Image } from "react";
+import { FC } from "react";
 import Logo from '../assets/FuzzBiz.png'
 import FooterLogo from '../assets/FuzzBiz2.png'
+import { LayoutProps } from "../types";
 
-interface MyComponentProps {
-    children: ReactNode;
-}
 
 const Header = () => {
+
   return (
     <header className='header'>
       <div className='header-logo-container'>
@@ -36,18 +35,18 @@ const Footer = () => {
                 but does not represent any actual product or project undertaken by Fetch Rewards.
                 </p>
         </div>
-        <div className='footer-text-spacer'></div>
+        <div className='footer-text-spacer'>© 2025</div>
     </footer>
   )
 }
 
 
-const Layout: FC<MyComponentProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
    
     return (
         <>
             <Header />
-                <div>{children}</div>
+                <div >{children}</div>
             <Footer />
         </>
     )
