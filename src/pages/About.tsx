@@ -1,9 +1,10 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
-type Props = {}
-
-export default function About({}: Props) {
+export default function About() {
   return (
-    <div>About</div>
+    <Layout isLoggedIn={false} handleLogout={() => false}>
+      <div>About</div>
+    </Layout>
   )
 }

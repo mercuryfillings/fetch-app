@@ -1,9 +1,10 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
-type Props = {}
-
-export default function Contact({}: Props) {
+export default function Contact() {
   return (
-    <div>Contact</div>
+    <Layout isLoggedIn={false} handleLogout={() => false}>
+      <div>Contact</div>
+    </Layout>
   )
 }

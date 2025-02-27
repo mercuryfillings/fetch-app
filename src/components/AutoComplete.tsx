@@ -1,64 +1,61 @@
-import React, { useState } from "react"
-import { BreedSearchProps } from "../types"
+import React, { useState, useEffect } from "react";
+import { AutoCompleteProps } from "../types";
 
-const AutoComplete: React.FC<BreedSearchProps> = ({ breeds, onSelectBreeds }) => {
-  const [query, setQuery] = useState("")
-  const [filteredBreeds, setFilteredBreeds] = useState<string[]>(breeds)
-  const [selectedBreeds, setSelectedBreeds] = useState<string[]>([])
+const AutoComplete = <T,>({ items, onSelect, getItemLabel, placeholder = "Search..." }: AutoCompleteProps<T>) => {
+  const [query, setQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState<T[]>(items);
+  const [selectedItems, setSelectedItems] = useState<T[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setQuery(value)
-    
-    setFilteredBreeds(
-      breeds.filter((breed) => breed.toLowerCase().includes(value.toLowerCase()))
-    )
-  }
+  useEffect(() => {
+    setFilteredItems(
+      items.filter((item) => getItemLabel(item).toLowerCase().includes(query.toLowerCase()))
+    );
+  }, [query, items, getItemLabel]);
 
-  const handleSelect = (breed: string) => {
-    if (!selectedBreeds.includes(breed)) {
-      const updatedBreeds = [...selectedBreeds, breed]
-      setSelectedBreeds(updatedBreeds)
-      onSelectBreeds(updatedBreeds)
+  const handleSelect = (item: T) => {
+    if (!selectedItems.includes(item)) {
+      const updatedItems = [...selectedItems, item];
+      setSelectedItems(updatedItems);
+      onSelect(updatedItems);
     }
-    setQuery("")
-  }
+    setQuery("");
+  };
 
-  const handleRemove = (breed: string) => {
-    const updatedBreeds = selectedBreeds.filter((b) => b !== breed)
-    setSelectedBreeds(updatedBreeds)
-    onSelectBreeds(updatedBreeds)
-  }
+  const handleRemove = (item: T) => {
+    const updatedItems = selectedItems.filter((selected) => selected !== item);
+    setSelectedItems(updatedItems);
+    onSelect(updatedItems);
+  };
 
   return (
     <div className="autocomplete-container">
-      <div className="selected-breeds">
-        {selectedBreeds.map((breed) => (
-          <span key={breed} className="selected-breed">
-            {breed} <button onClick={() => handleRemove(breed)}>×</button>
+      <div className="selected-items">
+        {selectedItems.map((item) => (
+          <span key={getItemLabel(item)} className="selected-item">
+            {getItemLabel(item)} <button className="autocomplete-x" onClick={() => handleRemove(item)}>×</button>
           </span>
         ))}
       </div>
 
       <input
         type="text"
-        placeholder="Search breeds..."
+        placeholder={placeholder}
         value={query}
-        onChange={handleChange}
-        className="search-input"
+        onChange={(e) => setQuery(e.target.value)}
+        className="search-field"
       />
 
       {query && (
         <ul className="autocomplete-list">
-          {filteredBreeds.map((breed) => (
-            <li key={breed} onClick={() => handleSelect(breed)}>
-              {breed}
+          {filteredItems.map((item) => (
+            <li key={getItemLabel(item)} onClick={() => handleSelect(item)}>
+              {getItemLabel(item)}
             </li>
           ))}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default AutoComplete
+export default AutoComplete;

@@ -1,7 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
+import { loginUser } from '../helpers';
+import { LoginProps } from '../types'
 import '../styles/styles.css'
 
-const Login = () => {
+const Login:React.FC<LoginProps> = ({ setIsLoggedIn }) => {
 
     //state
     const [formData, setFormData] = useState({name: '', email:''});
@@ -21,27 +23,7 @@ const Login = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        handleLogin()
-    }
-
-    const handleLogin = async () => {
-        try {
-            const response = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
-                method: "POST",
-                headers: myHeaders,
-                body: JSON.stringify({...formData}),
-                credentials: "include"
-              });
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-              }
-            const data = await response;
-            console.log(data, 'login successful');
-            return data
-        } catch (error) {
-            console.error('Login failed:', error);
-            throw error;
-        }
+        loginUser(myHeaders, formData, setIsLoggedIn)
     }
 
     //Form validation for email. Not my regex -- thanks to emailregex.com, for sharing a 99.99% solution! 
@@ -51,7 +33,6 @@ const Login = () => {
 
     return (
         <div className='login-form-container'>
-            <label className='login-label'>Please Log In</label>
             <form name='login-form' id='login-form' className='form' onSubmit={handleSubmit}>
                 <div className='login-field-container'>
                     <input 
@@ -74,7 +55,7 @@ const Login = () => {
                     />
                     {disabled && formData.email !== '' && <label className='warning-text' htmlFor='email'>Enter a valid email address</label>}
                 </div>
-                <button type='submit' className='login-button' disabled={disabled}>Login</button>
+                <button type='submit' className='login-button' disabled={disabled}>LOG IN</button>
             </form>
         </div>
     )
