@@ -32,8 +32,8 @@ const App: React.FC = () => {
   //function callbacks
 
   const fetchDogIdsCallback = useCallback(() => {
-    fetchDogIds(setDogIds, setLoading, setTotalResults, zipCode, numberOfResults, sortBy, minAge, maxAge)
-  }, [zipCode, numberOfResults, sortBy, minAge, maxAge])
+    fetchDogIds(setDogIds, setLoading, setTotalResults, zipCode, numberOfResults, sortBy, minAge, maxAge, currentPage)
+  }, [zipCode, numberOfResults, sortBy, minAge, maxAge, currentPage])
 
   const fetchDogsCallback = useCallback(() => {
     if (dogIds.length > 0) {
@@ -62,7 +62,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     fetchDogsCallback()
-  }, [dogIds, fetchDogsCallback])
+  }, [dogIds, fetchDogsCallback, currentPage])
 
   useEffect(() => {
     checkAuth(setIsLoggedIn)
@@ -80,15 +80,29 @@ const App: React.FC = () => {
                   <h2 className="login-headline">Bring Love Home</h2>
                   <p className="login-copy">Choose from hundreds of dogs available for adoption. Build your perfect wish list. Search by breed and zip code. Click match and let our algorithm connect you with your new best friend.</p>
                 </div>
-                <Login setIsLoggedIn={setIsLoggedIn}/>
+                <Login 
+                  setIsLoggedIn={setIsLoggedIn}
+                />
               </div>}
               {isLoggedIn &&
                <div className="app-content-container">
-                <Search updateDogIds={updateDogIds} setZipCode={setZipCode} setSearchParameters={setSearchParameters} />
+                <Search 
+                  updateDogIds={updateDogIds} 
+                  setZipCode={setZipCode} 
+                  setSearchParameters={setSearchParameters} 
+                />
                 <div className="page-container">
                   <h2 className="browse-header">Select potential matches below</h2>
-                  <Browse dogs={dogs} selectedDogs={selectedDogs} setSelectedDogs={setSelectedDogs}/>
-                  <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={() => console.log('clicked')}/>
+                  <Browse 
+                    dogs={dogs} 
+                    selectedDogs={selectedDogs} 
+                    setSelectedDogs={setSelectedDogs}
+                  />
+                  <Pagination 
+                    currentPage={currentPage} 
+                    totalPages={totalPages} 
+                    onPageChange={(page) => setCurrentPage(page)}
+                  />
                 </div>
               </div>
                }

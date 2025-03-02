@@ -2,9 +2,8 @@ import { useState, useEffect, useCallback, FormEvent, ChangeEvent } from 'react'
 import { fetchOptions, fetchContent } from '../helpers'
 import { SearchProps } from '../types'
 import AutoComplete from './AutoComplete'
-// import MultiSelect from './MultiSelect'
 
-const Search: React.FC<SearchProps> = ({ updateDogIds, setSearchParameters }) => {
+const Search: React.FC<SearchProps> = ({ updateDogIds }) => {
 
     const [loading, setLoading] = useState<boolean>(true)
     const [breeds, setBreeds] = useState<string[]>([])

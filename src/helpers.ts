@@ -84,7 +84,8 @@ export const fetchDogIds = async (
     numberOfResults: number, 
     sortBy: string, 
     minAge: number, 
-    maxAge: number) => {
+    maxAge: number,
+    currentPage: number) => {
     try {
         const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=${numberOfResults}&sort=breed:${sortBy}`, {
             method: "GET",
