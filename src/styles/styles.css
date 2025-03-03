@@ -566,29 +566,45 @@ input {
 
 .pagination {
   display: flex;
+  flex-direction: column;
   gap: 8px;
   justify-content: center;
-  margin-top: 20px;
-  /* max-width: 50px;
-  overflow: hidden; */
+  align-items: center;
+  margin: 20px;
+  
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .pagination button {
   padding: 8px 12px;
   border: 1px solid #ccc;
+  border-radius: 5px;
   background: white;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
-.pagination button.active {
+.pagination button:hover {
   background: var(--dodger-blue);
+  color: white;
+}
+
+.pagination button:active {
+  background: rgb(166, 223, 242);
   color: white;
 }
 
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.page-numbers {
+  font-family: var(--sans-font)
 }
 
 .icon {

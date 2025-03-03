@@ -80,16 +80,10 @@ export const fetchDogIds = async (
     setDogIds: React.Dispatch<React.SetStateAction<string[]>>, 
     setLoading: React.Dispatch<React.SetStateAction<boolean>>, 
     setTotalResults: React.Dispatch<React.SetStateAction<number>>,
-    setNext: React.Dispatch<React.SetStateAction<string>>,
-    numberOfResults: number | undefined, 
-    sortBy: string) => {
+    setNext: React.Dispatch<React.SetStateAction<string>>) => {
     try {
 
-        const size = numberOfResults ?? 10
-
-        console.log('size', size)
-
-        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=${size}&sort=${sortBy}`, {
+        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:asc`, {
             method: "GET",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -121,7 +115,7 @@ export const fetchContent = async (
     setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>,
     setTotalResults: React.Dispatch<React.SetStateAction<number>>,
     setNext: React.Dispatch<React.SetStateAction<string>>,
-    setSearchParameters: React.Dispatch<React.SetStateAction<object>>
+    setNumberOfResults: React.Dispatch<React.SetStateAction<number>>
 ) => {
     try {
         const queryParams = new URLSearchParams()
@@ -148,12 +142,9 @@ export const fetchContent = async (
         setTotalResults(json.total)
         setNext(json.next)
         setReturnedBreedIds(json.resultIds)
-
         if (numResults) {
-            setSearchParameters((prev) => ({
-            ...prev,
-            numberOfResults: parseInt(numResults),
-          }))}
+            setNumberOfResults(parseInt(numResults))
+        }
 
     } catch (error) {
         console.error('Login failed:', error)

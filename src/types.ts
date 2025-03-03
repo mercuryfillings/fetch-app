@@ -50,7 +50,7 @@ export interface SearchProps {
     setNext: (next: string) => void
     setPrev: (prev: string) => void
     setReturnedBreedIds: (ids: string[]) => void
-    setSearchParameters: (params: SearchParameters) => void
+    setNumberOfResults: (num: number) => void
     returnedBreedIds: string[]
 }
 
@@ -77,18 +77,10 @@ export interface PaginationProps {
   onPrev: () => void;
   currentPage: number;
   totalPages: number;
+  setCurrentPage: (page: number) => void;
 }
 
 export interface BadgeProps {
   count: number
   selectedDogs: string[]
-}
-
-export interface SearchParameters {
-  breeds: string[]
-  zipCode: number
-  numberOfResults: number
-  sortBy: string
-  minAge: number
-  maxAge: number
 }
