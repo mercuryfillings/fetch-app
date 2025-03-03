@@ -81,10 +81,15 @@ export const fetchDogIds = async (
     setLoading: React.Dispatch<React.SetStateAction<boolean>>, 
     setTotalResults: React.Dispatch<React.SetStateAction<number>>,
     setNext: React.Dispatch<React.SetStateAction<string>>,
-    numberOfResults: number, 
+    numberOfResults: number | undefined, 
     sortBy: string) => {
     try {
-        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=${numberOfResults}&sort=breed:${sortBy}`, {
+
+        const size = numberOfResults ?? 10
+
+        console.log('size', size)
+
+        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=${size}&sort=${sortBy}`, {
             method: "GET",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -109,22 +114,27 @@ export const fetchDogIds = async (
 export const fetchContent = async (
     selectedBreeds: string[], 
     zipCode: string,
-    numResults: string,
+    numResults: string | undefined,
     minAge: string,
     maxAge: string,
     sortBy: string,
     setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>,
     setTotalResults: React.Dispatch<React.SetStateAction<number>>,
-    setNext: React.Dispatch<React.SetStateAction<string>>
+    setNext: React.Dispatch<React.SetStateAction<string>>,
+    setSearchParameters: React.Dispatch<React.SetStateAction<object>>
 ) => {
     try {
         const queryParams = new URLSearchParams()
-        selectedBreeds.forEach((breed) => queryParams.append("breeds", breed))
+        if (selectedBreeds.length > 0) {
+            selectedBreeds.forEach((breed) => queryParams.append("breeds", breed))
+        } 
         if (zipCode && zipCode.length === 5) queryParams.append("zipCodes", zipCode)
-        if (numResults) queryParams.append("size", numResults)
+        queryParams.append("size", numResults && numResults.trim() !== "" ? numResults : "10")
         if (minAge) queryParams.append("ageMin", minAge)
         if (maxAge) queryParams.append("ageMax", maxAge)
-        if (sortBy) queryParams.append("sort", sortBy)
+        queryParams.append("sort", sortBy ? sortBy : "breed:asc")
+
+            console.log('queryParams', queryParams.toString())
 
         const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search/?${queryParams.toString()}`, {
             method: "GET",
@@ -138,6 +148,12 @@ export const fetchContent = async (
         setTotalResults(json.total)
         setNext(json.next)
         setReturnedBreedIds(json.resultIds)
+
+        if (numResults) {
+            setSearchParameters((prev) => ({
+            ...prev,
+            numberOfResults: parseInt(numResults),
+          }))}
 
     } catch (error) {
         console.error('Login failed:', error)

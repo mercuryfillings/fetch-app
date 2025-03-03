@@ -49,8 +49,9 @@ export interface SearchProps {
     setTotalResults: (total: number) => void
     setNext: (next: string) => void
     setPrev: (prev: string) => void
-    returnedBreedIds: (string[])
     setReturnedBreedIds: (ids: string[]) => void
+    setSearchParameters: (params: SearchParameters) => void
+    returnedBreedIds: string[]
 }
 
 export interface BreedSearchProps {
@@ -84,6 +85,8 @@ export interface BadgeProps {
 }
 
 export interface SearchParameters {
+  breeds: string[]
+  zipCode: number
   numberOfResults: number
   sortBy: string
   minAge: number

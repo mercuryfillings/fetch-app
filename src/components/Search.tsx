@@ -3,13 +3,12 @@ import { fetchOptions, fetchContent } from '../helpers'
 import { SearchProps } from '../types'
 import AutoComplete from './AutoComplete'
 
-const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext, returnedBreedIds, setReturnedBreedIds }) => {
+const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext, returnedBreedIds, setReturnedBreedIds, setSearchParameters }) => {
 
     const [loading, setLoading] = useState<boolean>(true)
     const [breeds, setBreeds] = useState<string[]>([])
     const [selectedBreeds, setSelectedBreeds] = useState<string[]>([])
     const [formData, setFormData] = useState({zipCode: '', numResults: '', minAge: '', maxAge: '', sortBy: ''})
-
 
     const { zipCode, numResults, minAge, maxAge, sortBy } = formData
 
@@ -27,10 +26,8 @@ const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext,
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (selectedBreeds.length === 0) {
-            console.warn("No breeds selected")
-            return
-        }
+
+        console.log(selectedBreeds)
 
         await fetchContent(
             selectedBreeds, 
@@ -41,8 +38,8 @@ const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext,
             sortBy, 
             setReturnedBreedIds, 
             setTotalResults, 
-            setNext)
-
+            setNext,
+            setSearchParameters)
     }
 
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -74,13 +71,13 @@ const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext,
         <div className="search-container">
             <div className="search-interface-container">
                 <form onSubmit={handleSubmit}>
-                    <AutoComplete items={breeds} getItemLabel={(item) => item} onSelect={setSelectedBreeds} placeholder="Search Breeds" />
+                    <AutoComplete items={breeds} getItemLabel={(item) => item} onSelect={setSelectedBreeds} placeholder="Search by Breeds" />
                     <input 
                         name="zipCode"
                         value={formData.zipCode || ''}
                         onChange={handleChange} 
                         className="search-field" 
-                        placeholder="Zip Code (optional)" />
+                        placeholder="Zip Code" />
                     <input 
                         name="numResults"
                         value={formData.numResults || ''}
@@ -93,13 +90,13 @@ const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext,
                         value={formData.minAge || ''}
                         onChange={handleChange} 
                         className="search-field" 
-                        placeholder="Minimum Age (optional)" />
+                        placeholder="Minimum Age" />
                     <input 
                         name="maxAge"
                         value={formData.maxAge || ''}
                         onChange={handleChange} 
                         className="search-field" 
-                        placeholder="Maximum Age (optional)" />
+                        placeholder="Maximum Age" />
                     <select className="search-field" id="sort" value={formData.sortBy} onChange={handleSelect}>
                         <option value="">Sort By (optional)</option>
                         <option value="breed:asc">Sort Ascending by Breed</option>

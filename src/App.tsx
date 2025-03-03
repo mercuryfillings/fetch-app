@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [prev, setPrev] = useState<string>('')
   const [next, setNext] = useState<string>('')
   const [returnedBreedIds, setReturnedBreedIds] = useState<string[]>([])
-  const [searchParameters, setSearchParameters] = useState<SearchParameters>({numberOfResults: 10, sortBy: 'asc', minAge: 0, maxAge: 30})
+  const [searchParameters, setSearchParameters] = useState<SearchParameters>({breeds: [], zipCode: 0, numberOfResults: 10, sortBy: 'breed:asc', minAge: 0, maxAge: 30})
   const { numberOfResults, sortBy } = searchParameters
   const totalPages = Math.ceil(totalResults / numberOfResults)
 
@@ -42,14 +42,6 @@ const App: React.FC = () => {
     await fetchPrev(prev, setReturnedBreedIds, setPrev, setNext)
     setCurrentPage(currentPage - 1)
   }
-
-  const updateSearchParameters = (newParams: Partial<SearchParameters>) => {
-    setSearchParameters((prev) => ({
-      ...prev,
-      ...newParams
-    }));
-    setCurrentPage(1)
-  };
 
   //function callbacks
 
@@ -81,7 +73,7 @@ const App: React.FC = () => {
       fetchDogIdsCallback()
       setCurrentPage(1)
     }
-  }, [isLoggedIn, fetchDogIdsCallback, numberOfResults, sortBy])
+  }, [isLoggedIn, fetchDogIdsCallback])
 
   useEffect(() => {
     fetchDogsCallback()
@@ -115,6 +107,7 @@ const App: React.FC = () => {
                   setPrev={setPrev}
                   returnedBreedIds={returnedBreedIds}
                   setReturnedBreedIds={setReturnedBreedIds}
+                  setSearchParameters={setSearchParameters}
                 />
                 <div className="page-container">
                   <h2 className="browse-header">Select potential matches below</h2>

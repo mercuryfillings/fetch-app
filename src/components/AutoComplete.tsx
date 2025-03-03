@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { AutoCompleteProps } from "../types";
+import { useState, useEffect } from "react"
+import { AutoCompleteProps } from "../types"
 
 const AutoComplete = <T,>({ items, onSelect, getItemLabel, placeholder = "Search..." }: AutoCompleteProps<T>) => {
-  const [query, setQuery] = useState("");
-  const [filteredItems, setFilteredItems] = useState<T[]>(items);
-  const [selectedItems, setSelectedItems] = useState<T[]>([]);
+  const [query, setQuery] = useState("")
+  const [filteredItems, setFilteredItems] = useState<T[]>(items)
+  const [selectedItems, setSelectedItems] = useState<T[]>([])
 
   useEffect(() => {
     setFilteredItems(
       items.filter((item) => getItemLabel(item).toLowerCase().includes(query.toLowerCase()))
-    );
-  }, [query, items, getItemLabel]);
+    )
+  }, [query, items, getItemLabel])
 
   const handleSelect = (item: T) => {
     if (!selectedItems.includes(item)) {
-      const updatedItems = [...selectedItems, item];
-      setSelectedItems(updatedItems);
-      onSelect(updatedItems);
+      const updatedItems = [...selectedItems, item]
+      setSelectedItems(updatedItems)
+      onSelect(updatedItems)
     }
-    setQuery("");
-  };
+    setQuery("")
+  }
 
   const handleRemove = (item: T) => {
-    const updatedItems = selectedItems.filter((selected) => selected !== item);
-    setSelectedItems(updatedItems);
-    onSelect(updatedItems);
-  };
+    const updatedItems = selectedItems.filter((selected) => selected !== item)
+    setSelectedItems(updatedItems)
+    onSelect(updatedItems)
+  }
 
   return (
     <div className="autocomplete-container">
@@ -55,7 +55,7 @@ const AutoComplete = <T,>({ items, onSelect, getItemLabel, placeholder = "Search
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AutoComplete;
+export default AutoComplete
