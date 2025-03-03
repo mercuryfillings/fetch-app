@@ -13,7 +13,6 @@ import { FaArrowRight } from "react-icons/fa"
 const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogout, selectedDogs }) => {
 
   const navigate = useNavigate()
-  console.log(selectedDogs)
 
   return (
     <header className='header'>

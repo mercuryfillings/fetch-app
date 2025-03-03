@@ -29,7 +29,6 @@ export const loginUser = async (myHeaders: Headers, formData: { name: string; em
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
           }
-        const data = await response;
         setIsLoggedIn(true)
     } catch (error) {
         console.error('Login failed:', error);
@@ -68,6 +67,7 @@ export const fetchDogs = async (dogIds: string[], setDogs: React.Dispatch<React.
         }
 
         const json = await response.json()
+        console.log('fetchDogs', json)
         setDogs(json)
     } catch (error) {
         console.error(error)
@@ -79,13 +79,10 @@ export const fetchDogs = async (dogIds: string[], setDogs: React.Dispatch<React.
 export const fetchDogIds = async (
     setDogIds: React.Dispatch<React.SetStateAction<string[]>>, 
     setLoading: React.Dispatch<React.SetStateAction<boolean>>, 
-    setTotalResults: React.Dispatch<React.SetStateAction<number>>, 
-    zipCode: number,
+    setTotalResults: React.Dispatch<React.SetStateAction<number>>,
+    setNext: React.Dispatch<React.SetStateAction<string>>,
     numberOfResults: number, 
-    sortBy: string, 
-    minAge: number, 
-    maxAge: number,
-    currentPage: number) => {
+    sortBy: string) => {
     try {
         const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=${numberOfResults}&sort=breed:${sortBy}`, {
             method: "GET",
@@ -98,7 +95,8 @@ export const fetchDogIds = async (
         }
 
         const json = await response.json()
-        console.log(json)
+        console.log('fetchDogIds', json, `next: ${json.next}, total: ${json.total}`)
+        setNext(json.next)
         setDogIds(json.resultIds)
         setTotalResults(json.total)
     } catch (error) {
@@ -115,11 +113,14 @@ export const fetchContent = async (
     minAge: string,
     maxAge: string,
     sortBy: string,
-    setReturnedBreeds: React.Dispatch<React.SetStateAction<string[]>>) => {
+    setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>,
+    setTotalResults: React.Dispatch<React.SetStateAction<number>>,
+    setNext: React.Dispatch<React.SetStateAction<string>>
+) => {
     try {
         const queryParams = new URLSearchParams()
         selectedBreeds.forEach((breed) => queryParams.append("breeds", breed))
-        if (zipCode) queryParams.append("zipCodes", zipCode)
+        if (zipCode && zipCode.length === 5) queryParams.append("zipCodes", zipCode)
         if (numResults) queryParams.append("size", numResults)
         if (minAge) queryParams.append("ageMin", minAge)
         if (maxAge) queryParams.append("ageMax", maxAge)
@@ -133,8 +134,10 @@ export const fetchContent = async (
             throw new Error(`Response status: ${response.status}`)
         }
         const json = await response.json()
-        console.log(json)
-        setReturnedBreeds(json.resultIds)
+        console.log('fetchContent', json)
+        setTotalResults(json.total)
+        setNext(json.next)
+        setReturnedBreedIds(json.resultIds)
 
     } catch (error) {
         console.error('Login failed:', error)
@@ -142,21 +145,52 @@ export const fetchContent = async (
     }
 }
 
-export const fetchContentByLocation = async (value: string) => {
+export const fetchNext = async (
+    next: string,
+    setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>,
+    setPrev: React.Dispatch<React.SetStateAction<string>>, 
+    setNext: React.Dispatch<React.SetStateAction<string>>) => {
     try {
-        const response = await fetch(`https://frontend-take-home-service.fetch.com/locations/search/${value}`, {
-            method: "POST",
+        const response = await fetch('https://frontend-take-home-service.fetch.com' + next, {
+            method: "GET",
             credentials: "include",
         })
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`)
         }
-        const json = await response.json()
-        console.log(json)
-        return json
+        const json = await response.json() 
+        console.log('fetchContent', json)
+        setPrev(json.prev)
+        setNext(json.next)
+        setReturnedBreedIds(json.resultIds)
 
     } catch (error) {
-        console.error('Login failed:', error)
+        console.error('Next failed:', error)
+        throw error
+    }
+}
+
+export const fetchPrev = async (
+    prev: string,
+    setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>,
+    setPrev:React.Dispatch<React.SetStateAction<string>>, 
+    setNext: React.Dispatch<React.SetStateAction<string>>) => {
+    try {
+        const response = await fetch('https://frontend-take-home-service.fetch.com' + prev, {
+            method: "GET",
+            credentials: "include",
+        })
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`)
+        }
+        const json = await response.json() 
+        console.log('fetchContent', json)
+        setPrev(json.prev)
+        setNext(json.next)
+        setReturnedBreedIds(json.resultIds)
+
+    } catch (error) {
+        console.error('Next failed:', error)
         throw error
     }
 }

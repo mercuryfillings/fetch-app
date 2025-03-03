@@ -46,8 +46,11 @@ export interface HeaderProps {
 
 export interface SearchProps {
     updateDogIds: (ids: string[]) => void
-    setSearchParameters: (searchParamters: SearchParameters) => void
-    setZipCode: (zipCode: number) => void
+    setTotalResults: (total: number) => void
+    setNext: (next: string) => void
+    setPrev: (prev: string) => void
+    returnedBreedIds: (string[])
+    setReturnedBreedIds: (ids: string[]) => void
 }
 
 export interface BreedSearchProps {
@@ -62,13 +65,6 @@ export interface AutoCompleteProps<T> {
   placeholder?: string;
 }
 
-export interface MultiSelectProps {
-  onSelect: (selectedItems: string[]) => void
-  inputType: string
-  inputLength: number
-  placeholder?: string
-}
-
 export interface CardProps {
   dog: Dog
   selectedDogs: string[]
@@ -76,9 +72,10 @@ export interface CardProps {
 }
 
 export interface PaginationProps {
+  onNext: () => void;
+  onPrev: () => void;
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
 }
 
 export interface BadgeProps {

@@ -3,14 +3,13 @@ import { fetchOptions, fetchContent } from '../helpers'
 import { SearchProps } from '../types'
 import AutoComplete from './AutoComplete'
 
-const Search: React.FC<SearchProps> = ({ updateDogIds }) => {
+const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext, returnedBreedIds, setReturnedBreedIds }) => {
 
     const [loading, setLoading] = useState<boolean>(true)
     const [breeds, setBreeds] = useState<string[]>([])
     const [selectedBreeds, setSelectedBreeds] = useState<string[]>([])
     const [formData, setFormData] = useState({zipCode: '', numResults: '', minAge: '', maxAge: '', sortBy: ''})
 
-    const [returnedBreedIds, setReturnedBreedIds] = useState<string[]>([])
 
     const { zipCode, numResults, minAge, maxAge, sortBy } = formData
 
@@ -19,12 +18,12 @@ const Search: React.FC<SearchProps> = ({ updateDogIds }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         const numericValue = value.replace(numbersRegex, '')
-        const truncatedValue = numericValue.slice(0, 5)
+        const truncatedValue = name === 'zipCode' ? numericValue.slice(0, 5) : numericValue.slice(0,2)
         setFormData(prevData => ({
             ...prevData,
             [name]: truncatedValue.toString()
-        }));
-    };
+        }))
+    }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -33,17 +32,25 @@ const Search: React.FC<SearchProps> = ({ updateDogIds }) => {
             return
         }
 
-        await fetchContent(selectedBreeds, zipCode, numResults, minAge, maxAge, sortBy, setReturnedBreedIds)
+        await fetchContent(
+            selectedBreeds, 
+            zipCode, 
+            numResults, 
+            minAge, 
+            maxAge, 
+            sortBy, 
+            setReturnedBreedIds, 
+            setTotalResults, 
+            setNext)
 
     }
 
     const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-        const { value } = e.target;
+        const { value } = e.target
         setFormData((prevData) => ({
           ...prevData,
           sortBy: value,
         }))
-        console.log(formData)
     }
 
     const fetchBreedsCallback = useCallback(() => {
@@ -79,7 +86,7 @@ const Search: React.FC<SearchProps> = ({ updateDogIds }) => {
                         value={formData.numResults || ''}
                         onChange={handleChange}
                         className="search-field" 
-                        placeholder="number of results (optional)" 
+                        placeholder="Results per page (up to 99)" 
                     />
                     <input 
                         name="minAge"
