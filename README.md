@@ -1,51 +1,20 @@
-# React + TypeScript + Vite
+# FuzzBiz: A Coding Exercise by Scott Delbango
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Curious about FuzzBiz? Here's what the AI Supermind has to say about it:
 
-Currently, two official plugins are available:
+'''
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Find Your Perfect Pup – The Smart Way! 🐶✨
+Tired of endlessly scrolling through dog adoption sites? Our intelligent search platform makes finding your new furry best friend effortless!
 
-## Expanding the ESLint configuration
+🚀 Advanced Search Filters – Narrow down your options with breed preferences, age range, zip code, and custom sorting.
+📍 Location-Based Results – Simply enter your zip code, and we'll show you adorable adoptable pups near you.
+⚡ Lightning-Fast Searches – Get tailored results in seconds with a sleek, user-friendly interface.
+🔍 Customizable Results Per Page – View 10, 25, or more results at a time—your search, your way!
+🐾 Smart Matching Technology – Our system ensures you see the most relevant dogs first, helping you find the perfect match faster.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Whether you're looking for a playful puppy or a laid-back companion, our platform is designed to make your dog adoption journey smooth, efficient, and exciting. Start your search today and meet your new best friend! 🏡❤️
 
-- Configure the top-level `parserOptions` property like this:
+'''
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-# fetch-app
+In reality, it's a coding exercise for to whom it may concern at Fetch Rewards.
