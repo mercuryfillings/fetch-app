@@ -5,22 +5,32 @@ import Layout from './components/Layout'
 import Pagination from './components/Pagination'
 import { useState, useEffect, useCallback } from 'react'
 import { fetchDogs, fetchDogIds, checkAuth, logoutUser, fetchNext, fetchPrev } from './helpers'
-import { Dog, SearchParameters } from './types'
+import { Dog } from './types'
 import './styles/styles.css'
 
 const App: React.FC = () => {
 
+  //State
+
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [browseHeader, setBrowseHeader] = useState<string>('browse-header')
   const [loading, setLoading] = useState<boolean>(true)
   const [dogIds, setDogIds] = useState<string[]>([])
   const [dogs, setDogs] = useState<Dog[]>([])
-  const [totalResults, setTotalResults] = useState<number>(0)
+  const [totalResults, setTotalResults] = useState<number>(1)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedDogs, setSelectedDogs] = useState<string[]>([])
   const [prev, setPrev] = useState<string>('')
   const [next, setNext] = useState<string>('')
   const [returnedBreedIds, setReturnedBreedIds] = useState<string[]>([])
   const [numberOfResults, setNumberOfResults] = useState<number>(10)
+  const copy = {
+    standard: "Select poential matches below",
+    alert: "No results found" 
+  }
+
+  const { standard, alert } = copy
+
   const totalPages = Math.ceil(totalResults / numberOfResults)
 
   const handleLogout = () => {
@@ -67,6 +77,17 @@ const App: React.FC = () => {
     })
   }, [])
 
+  const handleResultCopy = useCallback(() => {
+    if (totalResults > 0) {
+      setBrowseHeader('browse-header')
+      console.log('>0',browseHeader)
+    }
+    if (totalResults === 0) {
+          setBrowseHeader('browse-header alert')
+          console.log('0',browseHeader)
+        }
+      }, [totalResults, setBrowseHeader, browseHeader])
+
   useEffect(() => {
     if (isLoggedIn) {
       fetchDogIdsCallback()
@@ -81,6 +102,10 @@ const App: React.FC = () => {
   useEffect(() => {
     checkAuth(setIsLoggedIn)
   }, [])
+
+  useEffect(() => {
+    handleResultCopy()
+  }, [handleResultCopy]);
 
   return (
 
@@ -109,7 +134,7 @@ const App: React.FC = () => {
                   setNumberOfResults={setNumberOfResults}
                 />
                 <div className="page-container">
-                  <h2 className="browse-header">Select potential matches below</h2>
+                  <h2 className={browseHeader}>{totalResults === 0 ? alert : standard}</h2>
                   <Browse 
                     dogs={dogs} 
                     selectedDogs={selectedDogs} 

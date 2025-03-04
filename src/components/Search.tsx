@@ -3,7 +3,15 @@ import { fetchOptions, fetchContent } from '../helpers'
 import { SearchProps } from '../types'
 import AutoComplete from './AutoComplete'
 
-const Search: React.FC<SearchProps> = ({ updateDogIds, setTotalResults, setNext, returnedBreedIds, setReturnedBreedIds, setNumberOfResults }) => {
+const Search: React.FC<SearchProps> = ({ 
+    updateDogIds, 
+    setTotalResults, 
+    setNext, 
+    returnedBreedIds, 
+    setReturnedBreedIds, 
+    setNumberOfResults, 
+    handleNoResults 
+}) => {
 
     const [loading, setLoading] = useState<boolean>(true)
     const [breeds, setBreeds] = useState<string[]>([])

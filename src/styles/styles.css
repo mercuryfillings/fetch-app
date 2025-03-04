@@ -428,6 +428,11 @@ input {
   background: var(--lime-green);
   color: white;
   border-radius: 0 0 0 15px;
+  transition: .2s;
+}
+
+.alert{
+  background: var(--raspberry);
 }
 
 .browse-page {

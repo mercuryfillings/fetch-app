@@ -4,10 +4,6 @@ import Card from './Card'
   
 const Browse: React.FC<BrowseProps> = ({ dogs, selectedDogs, setSelectedDogs }) => {
 
-    //handle user clicks
-
-    //
-
   return (
     <div className="browse-page"> 
         <div className="browse-container">

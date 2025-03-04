@@ -83,7 +83,7 @@ export const fetchDogIds = async (
     setNext: React.Dispatch<React.SetStateAction<string>>) => {
     try {
 
-        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=10&sort=breed:asc`, {
+        const response = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?size=12&sort=breed:asc`, {
             method: "GET",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -123,7 +123,7 @@ export const fetchContent = async (
             selectedBreeds.forEach((breed) => queryParams.append("breeds", breed))
         } 
         if (zipCode && zipCode.length === 5) queryParams.append("zipCodes", zipCode)
-        queryParams.append("size", numResults && numResults.trim() !== "" ? numResults : "10")
+        queryParams.append("size", numResults && numResults.trim() !== "" ? numResults : "12")
         if (minAge) queryParams.append("ageMin", minAge)
         if (maxAge) queryParams.append("ageMax", maxAge)
         queryParams.append("sort", sortBy ? sortBy : "breed:asc")
@@ -149,7 +149,7 @@ export const fetchContent = async (
     } catch (error) {
         console.error('Login failed:', error)
         throw error
-    }
+    } 
 }
 
 export const fetchNext = async (
