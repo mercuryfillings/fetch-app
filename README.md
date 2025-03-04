@@ -2,8 +2,6 @@
 
 Curious about FuzzBiz? Here's what the AI Supermind has to say about it:
 
-'''
-
 Find Your Perfect Pup – The Smart Way! 🐶✨
 Tired of endlessly scrolling through dog adoption sites? Our intelligent search platform makes finding your new furry best friend effortless!
 
@@ -15,6 +13,6 @@ Tired of endlessly scrolling through dog adoption sites? Our intelligent search 
 
 Whether you're looking for a playful puppy or a laid-back companion, our platform is designed to make your dog adoption journey smooth, efficient, and exciting. Start your search today and meet your new best friend! 🏡❤️
 
-'''
 
-In reality, it's a coding exercise for to whom it may concern at Fetch Rewards.
+
+In reality, it's a coding exercise for to whom it may concern at Fetch Rewards. Give me a call if you think it's interesting.
