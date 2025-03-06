@@ -44,6 +44,8 @@ const MatchPage = () => {
       fetchDogsCallback()
     }, [fetchDogsCallback, selectedDogs])
 
+    console.log(loading)
+
   return (
     <Layout isLoggedIn={isLoggedIn} handleLogout={() => console.log('test')} selectedDogs={selectedDogs}>
       <div className="match-container">

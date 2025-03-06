@@ -1,4 +1,4 @@
-import { Dog, Match } from './types'
+import { Dog } from './types'
 
 //For App
 

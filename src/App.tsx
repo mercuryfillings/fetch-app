@@ -111,6 +111,8 @@ const App: React.FC = () => {
     setSelectedDogs(location.state?.selectedDogs || [])
   }, [location.state?.selectedDogs])
 
+  console.log(loading)
+
   return (
 
     <>

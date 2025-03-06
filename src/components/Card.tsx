@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs, x}) => {
 }
 
   const handleRemove = () => {
-    setSelectedDogs(prev => prev.filter(item => item !== dog.id))
+    setSelectedDogs(selectedDogs.filter(item => item !== dog.id))
   }
 
   return (

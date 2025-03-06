@@ -34,7 +34,7 @@ export interface BrowseProps {
   }
 
 export interface LoginProps {
-    setIsLoggedIn: (login: boolean) => void
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface LayoutProps {
@@ -52,11 +52,11 @@ export interface HeaderProps {
 
 export interface SearchProps {
     updateDogIds: (ids: string[]) => void
-    setTotalResults: (total: number) => void
-    setNext: (next: string) => void
-    setPrev: (prev: string) => void
-    setReturnedBreedIds: (ids: string[]) => void
-    setNumberOfResults: (num: number) => void
+    setTotalResults: React.Dispatch<React.SetStateAction<number>>
+    setNext: React.Dispatch<React.SetStateAction<string>>
+    setPrev: React.Dispatch<React.SetStateAction<string>>
+    setReturnedBreedIds: React.Dispatch<React.SetStateAction<string[]>>
+    setNumberOfResults: React.Dispatch<React.SetStateAction<number>>
     returnedBreedIds: string[]
 }
 
