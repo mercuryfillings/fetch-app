@@ -17,14 +17,14 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogout, selectedDogs 
   return (
     <header className='header'>
       <div className='header-logo-container'>
-        <button className="logo-button" onClick={() => navigate("/")}><img src={Logo} /></button>
+        <img src={Logo} />
       </div>
       <div className='nav-container'>
         <ul className='nav-list'>
             <li className='nav-list-item'><a className="nav-link" href="/about">About</a></li>
             <li className='nav-list-item'><a className="nav-link" href="https://github.com/mercuryfillings/fetch-app" target='_blank'>Repo</a></li>
             <li className='nav-list-item'><a className="nav-link" href="/contact">Contact</a></li>
-            {selectedDogs.length > 0 && <li className='nav-list-item'><Badge count={selectedDogs.length} selectedDogs={selectedDogs} /></li>}
+            {selectedDogs.length > 0 && <li className='nav-list-item'><Badge count={selectedDogs.length} selectedDogs={selectedDogs}/></li>}
             {isLoggedIn && (
               <li className='nav-list-item'><button onClick={handleLogout} className="logout-button">Log Out <FaArrowRight /></button></li>
             )}
@@ -58,7 +58,7 @@ const Layout: FC<LayoutProps> = ({ children, isLoggedIn, handleLogout, selectedD
     return (
         <div className="site">
           <div className="site-wrapper">
-            <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} selectedDogs={selectedDogs}/>
+            <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} selectedDogs={selectedDogs} />
             <Banner />
                 <div >{children}</div>
             <Footer />

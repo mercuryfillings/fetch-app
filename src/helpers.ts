@@ -25,14 +25,14 @@ export const loginUser = async (myHeaders: Headers, formData: { name: string; em
             headers: myHeaders,
             body: JSON.stringify({...formData}),
             credentials: "include"
-          });
+          })
         if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+            throw new Error(`Response status: ${response.status}`)
           }
         setIsLoggedIn(true)
     } catch (error) {
-        console.error('Login failed:', error);
-        throw error;
+        console.error('Login failed:', error)
+        throw error
     }
 }
 

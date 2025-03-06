@@ -40,14 +40,12 @@ const App: React.FC = () => {
 
   const onNext = async () => {
     if (!next) return
-    console.log("next", next);
-    await fetchNext(next, setReturnedBreedIds, setPrev, setNext);
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+    await fetchNext(next, setReturnedBreedIds, setPrev, setNext)
+    setCurrentPage((prevPage) => prevPage + 1)
+  }
 
   const onPrev = async () => {
     if (!prev) return
-    console.log('prev', prev)
     await fetchPrev(prev, setReturnedBreedIds, setPrev, setNext)
     setCurrentPage(currentPage - 1)
   }
@@ -104,7 +102,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     handleResultCopy()
-  }, [handleResultCopy]);
+  }, [handleResultCopy])
 
   return (
 
@@ -139,6 +137,7 @@ const App: React.FC = () => {
                     selectedDogs={selectedDogs} 
                     setSelectedDogs={setSelectedDogs}
                     match={''}
+                    x={false}
                   />
                   <Pagination 
                     onNext={onNext}

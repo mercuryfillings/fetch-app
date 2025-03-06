@@ -34,8 +34,6 @@ const Search: React.FC<SearchProps> = ({
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        console.log(selectedBreeds)
-
         await fetchContent(
             selectedBreeds, 
             zipCode, 

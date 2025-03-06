@@ -7,8 +7,14 @@ import Browse from '../components/Browse'
 
 const MatchPage = () => {
 
+    //location variables
+
     const location = useLocation()
-    const { isLoggedIn, selectedDogs } = location.state || {}
+    const { isLoggedIn } = location.state || {}
+    
+    
+    //state
+    const [selectedDogs, setSelectedDogs] = useState<string[]>(location.state?.selectedDogs || [])
     const [dogs, setDogs] = useState<Dog[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [match, setMatch] = useState<string>('')
@@ -36,7 +42,7 @@ const MatchPage = () => {
 
     useEffect(() => {
       fetchDogsCallback()
-    }, [fetchDogsCallback])
+    }, [fetchDogsCallback, selectedDogs])
 
   return (
     <Layout isLoggedIn={isLoggedIn} handleLogout={() => console.log('test')} selectedDogs={selectedDogs}>
@@ -46,7 +52,8 @@ const MatchPage = () => {
         </div>
         <div className="match-content-container">
           <h2 className="browse-header">{match ? headerCopy.found : headerCopy.find}</h2>
-          <Browse dogs={dogs} selectedDogs={selectedDogs} match={match} setSelectedDogs={() => console.log('test')} x={true}/>
+          {selectedDogs.length < 1 && <p className="match-copy-container">No matches found</p>}
+          {selectedDogs.length > 0 && <Browse dogs={dogs} selectedDogs={selectedDogs} match={match} setSelectedDogs={setSelectedDogs} x={true}/>}
         </div>
       </div>
     </Layout>

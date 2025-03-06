@@ -226,7 +226,6 @@ input {
   color: white;
   font-family: var(--sans-font);
   font-size: 1.5rem;
-  letter-spacing: 5px;
   transition: .2s;
 }
 
@@ -247,7 +246,8 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .login-field-container {
@@ -670,7 +670,6 @@ input {
 .match-results {
   display: flex;
   padding: 5vw;
-  transition: 2s;
 }
 
 .match-image-container {
@@ -716,6 +715,20 @@ input {
   cursor: pointer;
 }
 
+.content-page {
+  padding: 5vw;
+  line-height: 2rem;
+  font-family: var(--sans-font);
+}
+
+.about-headline {
+  font-family: var(--serif-font);
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+
+
 /* XL styles */
 
 @media(min-width: 2000px) {
@@ -732,4 +745,89 @@ input {
   }
 }
 
+@media(min-width: 1600px) {
+  .browse-container {
+    grid-template-columns: repeat(4, 1fr); 
+  }
+}
+
 /* Mobile Styles */
+
+@media(max-width: 1160px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+  }
+  .banner-container {
+    max-height: 40vw;
+  }
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .login-container {
+    flex-direction: column;
+  }
+  .login-headline {
+    font-size: 2rem;
+  }
+  .login-copy-container {
+    align-items: center;
+    text-align: center;
+  }
+  .login-copy {
+    max-width: 100%;
+  }
+  .login-form-container {
+    padding: 0;
+    margin: 0 0 10vw 0;
+  }
+  .login-button {
+    max-width: 90%;
+  }
+  .app-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .search-container {
+    flex: 1;
+  }
+
+  .page-container {
+    flex: 1;
+    max-width: 100%;
+  }
+  .browse-container {
+    grid-template-columns: repeat(1, 1fr); 
+  }
+  .page-container {
+    width: 100%;
+  }
+  .browse-header {
+    border-radius: 0;
+  }
+  .match-container {
+    flex-direction: column-reverse;
+  }
+  .match-gutter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .match-results {
+    flex-direction: column;
+  }
+
+  @media(min-width: 567px) {
+    .browse-container {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .search-container {
+      max-width: 50vw;
+    }
+  }
+
+}

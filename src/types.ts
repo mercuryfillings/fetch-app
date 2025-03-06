@@ -41,13 +41,13 @@ export interface LayoutProps {
   children: React.ReactNode
   isLoggedIn: boolean
   handleLogout: () => void
-  selectedDogs: string[];
+  selectedDogs: string[]
 }
 
 export interface HeaderProps {
-  isLoggedIn: boolean;
-  handleLogout: () => void;
-  selectedDogs: string[];
+  isLoggedIn: boolean
+  handleLogout: () => void
+  selectedDogs: string[]
 }
 
 export interface SearchProps {
@@ -66,10 +66,10 @@ export interface BreedSearchProps {
 }
 
 export interface AutoCompleteProps<T> {
-  items: T[];
-  onSelect: (selectedItems: T[]) => void;
-  getItemLabel: (item: T) => string;
-  placeholder?: string;
+  items: T[]
+  onSelect: (selectedItems: T[]) => void
+  getItemLabel: (item: T) => string
+  placeholder?: string
 }
 
 export interface CardProps {
@@ -80,11 +80,11 @@ export interface CardProps {
 }
 
 export interface PaginationProps {
-  onNext: () => void;
-  onPrev: () => void;
-  currentPage: number;
-  totalPages: number;
-  setCurrentPage: (page: number) => void;
+  onNext: () => void
+  onPrev: () => void
+  currentPage: number
+  totalPages: number
+  setCurrentPage: (page: number) => void
 }
 
 export interface BadgeProps {

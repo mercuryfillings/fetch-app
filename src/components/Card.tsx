@@ -5,13 +5,19 @@ import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io"
 const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs, x}) => {
 
   const handleClick = () => {
-    if (!selectedDogs.includes(dog.id) && selectedDogs.length < 100) {
-      setSelectedDogs([...selectedDogs, dog.id])
-    } 
-    if (selectedDogs.includes(dog.id)) {
-      setSelectedDogs(selectedDogs.filter(item => item !== dog.id))
+    if (!x) {
+      if (!selectedDogs.includes(dog.id) && selectedDogs.length < 100) {
+        setSelectedDogs([...selectedDogs, dog.id])
+      } 
+      if (selectedDogs.includes(dog.id)) {
+        setSelectedDogs(selectedDogs.filter(item => item !== dog.id))
+      }
     }
 }
+
+  const handleRemove = () => {
+    setSelectedDogs(prev => prev.filter(item => item !== dog.id))
+  }
 
   return (
     <div className="card-container" onClick={handleClick}>
@@ -26,7 +32,7 @@ const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs, x}) => {
       </div>
       <div className="card-icon-container">
         {
-          x ? <button className="x">remove</button> : 
+          x ? <button className="x" onClick={handleRemove}>remove</button> : 
           selectedDogs.includes(dog.id) ? <div className="icon"><IoIosHeart /></div> : <div className="icon"><IoIosHeartEmpty /></div>
         }
       </div>
