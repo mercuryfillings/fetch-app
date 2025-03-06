@@ -1,9 +1,8 @@
-import React, { ChangeEvent } from 'react'
-import { CardProps, Dog } from '../types'
+import { CardProps } from '../types'
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io"
 
 
-const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs}) => {
+const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs, x}) => {
 
   const handleClick = () => {
     if (!selectedDogs.includes(dog.id) && selectedDogs.length < 100) {
@@ -26,7 +25,10 @@ const Card: React.FC<CardProps> = ({dog, selectedDogs, setSelectedDogs}) => {
           <p className="card-content">Zip: {dog.zip_code}</p>
       </div>
       <div className="card-icon-container">
-        {selectedDogs.includes(dog.id) ? <div className="icon"><IoIosHeart /></div> : <div className="icon"><IoIosHeartEmpty /></div>}
+        {
+          x ? <button className="x">remove</button> : 
+          selectedDogs.includes(dog.id) ? <div className="icon"><IoIosHeart /></div> : <div className="icon"><IoIosHeartEmpty /></div>
+        }
       </div>
     </div>
   )

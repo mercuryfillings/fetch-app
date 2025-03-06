@@ -21,10 +21,16 @@ export interface Coordinates {
     lon: number
 }
 
+export interface Match {
+  match: string
+}
+
 export interface BrowseProps {
     dogs: Dog[]
     selectedDogs: string[]
     setSelectedDogs: (selectedDogs: string[]) => void
+    match: string
+    x: boolean
   }
 
 export interface LoginProps {
@@ -70,6 +76,7 @@ export interface CardProps {
   dog: Dog
   selectedDogs: string[]
   setSelectedDogs: (selectedDogs: string[]) => void
+  x: boolean
 }
 
 export interface PaginationProps {

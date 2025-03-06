@@ -9,8 +9,7 @@ const Search: React.FC<SearchProps> = ({
     setNext, 
     returnedBreedIds, 
     setReturnedBreedIds, 
-    setNumberOfResults, 
-    handleNoResults 
+    setNumberOfResults
 }) => {
 
     const [loading, setLoading] = useState<boolean>(true)

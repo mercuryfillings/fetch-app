@@ -193,6 +193,7 @@ input {
 .login-headline {
   font-size: 3rem;
   font-family: var(--serif-font);
+  color: rgb(62, 66, 75);
 }
 
 .login-copy {
@@ -200,6 +201,8 @@ input {
   font-size: 1.1rem;
   max-width: 30vw;
   line-height: 1.7rem;
+  color: rgb(62, 66, 75);
+
 }
 
 .login-form-container {
@@ -428,7 +431,7 @@ input {
   background: var(--lime-green);
   color: white;
   border-radius: 0 0 0 15px;
-  transition: .2s;
+  transition: .2s
 }
 
 .alert{
@@ -645,3 +648,88 @@ input {
   justify-content: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+/* match page */
+
+.match-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.match-content-container {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.match-gutter {
+  flex: 1;
+  padding: 2vw;
+}
+
+.match-results {
+  display: flex;
+  padding: 5vw;
+  transition: 2s;
+}
+
+.match-image-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.match-image {
+  max-width: 35vw;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 
+              0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.match-copy-container {
+  flex: 2;
+  display: flex;
+  font-family: var(--serif-font);
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2vw;
+}
+
+.match-madlib {
+  font-size: 2.5rem;
+  color: var(--lime-green);
+  margin: 10px;
+  border-bottom: 5px solid var(--lime-green);
+}
+
+.match-copy {
+  text-align: center;
+}
+
+.x {
+  font-family: var(--sans-font);
+  color: var(--raspberry);
+  font-size: .7rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* XL styles */
+
+@media(min-width: 2000px) {
+  .site {
+    display: flex;
+    justify-content: center;
+  }
+  .site-wrapper {
+    max-width: 2000px;
+    position: relative;
+  }
+  .page-header {
+    font-size: 140px;
+  }
+}
+
+/* Mobile Styles */

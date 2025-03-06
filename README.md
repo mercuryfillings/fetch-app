@@ -15,4 +15,4 @@ Whether you're looking for a playful puppy or a laid-back companion, our platfor
 
 
 
-In reality, it's a coding exercise for to whom it may concern at Fetch Rewards. Give me a call if you think it's interesting.
+Everybody give it a round of applause -- it's trying. In reality, this is a coding exercise for to whom it may concern at Fetch Rewards. Give me a call if you think it's interesting.

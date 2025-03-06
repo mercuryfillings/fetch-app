@@ -23,10 +23,10 @@ const App: React.FC = () => {
   const [prev, setPrev] = useState<string>('')
   const [next, setNext] = useState<string>('')
   const [returnedBreedIds, setReturnedBreedIds] = useState<string[]>([])
-  const [numberOfResults, setNumberOfResults] = useState<number>(10)
+  const [numberOfResults, setNumberOfResults] = useState<number>(12)
   const copy = {
     standard: "Select poential matches below",
-    alert: "No results found" 
+    alert: "No results found. Try again." 
   }
 
   const { standard, alert } = copy
@@ -80,13 +80,12 @@ const App: React.FC = () => {
   const handleResultCopy = useCallback(() => {
     if (totalResults > 0) {
       setBrowseHeader('browse-header')
-      console.log('>0',browseHeader)
+      setCurrentPage(1)
     }
     if (totalResults === 0) {
           setBrowseHeader('browse-header alert')
-          console.log('0',browseHeader)
         }
-      }, [totalResults, setBrowseHeader, browseHeader])
+      }, [totalResults, setBrowseHeader])
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -139,6 +138,7 @@ const App: React.FC = () => {
                     dogs={dogs} 
                     selectedDogs={selectedDogs} 
                     setSelectedDogs={setSelectedDogs}
+                    match={''}
                   />
                   <Pagination 
                     onNext={onNext}

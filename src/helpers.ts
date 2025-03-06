@@ -1,4 +1,4 @@
-import { Dog } from './types'
+import { Dog, Match } from './types'
 
 //For App
 
@@ -222,3 +222,29 @@ export const fetchOptions = async (option:string, setBreeds: React.Dispatch<Reac
     }
 }
 
+//match page
+
+export const fetchMatches = async (dogIds: string[], setMatch: React.Dispatch<React.SetStateAction<string>>) => {
+    if (dogIds.length === 0) return
+
+    try {
+        const response = await fetch("https://frontend-take-home-service.fetch.com/dogs/match/", {
+            method: "POST",
+            body: JSON.stringify(dogIds),
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed")
+        }
+
+        const json = await response.json()
+        console.log('fetchMatches', json)
+        setMatch(json.match)
+    } catch (error) {
+        console.error(error)
+    } finally {
+        console.log('loading over')
+    }
+}

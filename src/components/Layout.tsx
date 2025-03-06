@@ -56,12 +56,14 @@ const Footer = () => {
 const Layout: FC<LayoutProps> = ({ children, isLoggedIn, handleLogout, selectedDogs }) => {
    
     return (
-        <>
+        <div className="site">
+          <div className="site-wrapper">
             <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} selectedDogs={selectedDogs}/>
             <Banner />
                 <div >{children}</div>
             <Footer />
-        </>
+          </div>
+        </div>
     )
   }
   
