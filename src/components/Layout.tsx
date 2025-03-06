@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogout, selectedDogs 
   return (
     <header className='header'>
       <div className='header-logo-container'>
-        <img src={Logo} />
+        <button className="logo-button" onClick={() => navigate("/", { state: { selectedDogs } })}><img src={Logo} /></button>
       </div>
       <div className='nav-container'>
         <ul className='nav-list'>

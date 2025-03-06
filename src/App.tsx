@@ -4,11 +4,14 @@ import Browse from './components/Browse'
 import Layout from './components/Layout'
 import Pagination from './components/Pagination'
 import { useState, useEffect, useCallback } from 'react'
+import { useLocation } from 'react-router'
 import { fetchDogs, fetchDogIds, checkAuth, logoutUser, fetchNext, fetchPrev } from './helpers'
 import { Dog } from './types'
 import './styles/styles.css'
 
 const App: React.FC = () => {
+
+  const location = useLocation()
 
   //State
 
@@ -103,6 +106,10 @@ const App: React.FC = () => {
   useEffect(() => {
     handleResultCopy()
   }, [handleResultCopy])
+
+  useEffect(() => {
+    setSelectedDogs(location.state?.selectedDogs || [])
+  }, [location.state?.selectedDogs])
 
   return (
 
