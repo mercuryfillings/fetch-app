@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const location = useLocation()
 
   //State
-
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const [browseHeader, setBrowseHeader] = useState<string>('browse-header')
   const [loading, setLoading] = useState<boolean>(true)
@@ -29,7 +28,7 @@ const App: React.FC = () => {
   const [numberOfResults, setNumberOfResults] = useState<number>(12)
   const copy = {
     standard: "Select poential matches below",
-    alert: "No results found. Try again." 
+    alert: "No results found. Try again."
   }
 
   const { standard, alert } = copy
@@ -64,7 +63,7 @@ const App: React.FC = () => {
       fetchDogs(dogIds, setDogs, setLoading)
     }
   }, [dogIds, setDogs, setLoading])
-  
+
   const updateDogIds = useCallback((newIds: string[]) => {
     if (!Array.isArray(newIds)) {
       console.error("updateDogIds received a non-array value:", newIds)
@@ -84,9 +83,9 @@ const App: React.FC = () => {
       setCurrentPage(1)
     }
     if (totalResults === 0) {
-          setBrowseHeader('browse-header alert')
-        }
-      }, [totalResults, setBrowseHeader])
+      setBrowseHeader('browse-header alert')
+    }
+  }, [totalResults, setBrowseHeader])
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -118,46 +117,45 @@ const App: React.FC = () => {
     <>
       <Layout isLoggedIn={isLoggedIn} handleLogout={handleLogout} selectedDogs={selectedDogs}>
         <main className="app-container">
-              {!isLoggedIn && 
-              <div className="login-container">
-                <div className="login-copy-container">
-                  <h2 className="login-headline">Bring Love Home</h2>
-                  <p className="login-copy">Choose from hundreds of dogs available for adoption. Build your perfect wish list. Search by breed and zip code. Click match and let our algorithm connect you with your new best friend.</p>
-                </div>
-                <Login 
-                  setIsLoggedIn={setIsLoggedIn}
-                />
-              </div>}
-              {isLoggedIn &&
-               <div className="app-content-container">
-                <Search 
-                  updateDogIds={updateDogIds} 
-                  setTotalResults={setTotalResults}
-                  setNext={setNext}
-                  setPrev={setPrev}
-                  returnedBreedIds={returnedBreedIds}
-                  setReturnedBreedIds={setReturnedBreedIds}
-                  setNumberOfResults={setNumberOfResults}
-                />
-                <div className="page-container">
-                  <h2 className={browseHeader}>{totalResults === 0 ? alert : standard}</h2>
-                  <Browse 
-                    dogs={dogs} 
-                    selectedDogs={selectedDogs} 
-                    setSelectedDogs={setSelectedDogs}
-                    match={''}
-                    x={false}
-                  />
-                  <Pagination 
-                    onNext={onNext}
-                    onPrev={onPrev}
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    setCurrentPage={setCurrentPage}
-                  />
-                </div>
+          {!isLoggedIn &&
+            <div className="login-container">
+              <div className="login-copy-container">
+                <h2 className="login-headline">Bring Love Home</h2>
+                <p className="login-copy">Choose from hundreds of dogs available for adoption. Build your perfect wish list. Search by breed and zip code. Click match and let our algorithm connect you with your new best friend.</p>
               </div>
-               }
+              <Login
+                setIsLoggedIn={setIsLoggedIn} 
+              />
+            </div>}
+          {isLoggedIn &&
+                <div className="app-content-container">
+                  <Search
+                    updateDogIds={updateDogIds}
+                    setTotalResults={setTotalResults}
+                    setNext={setNext}
+                    setPrev={setPrev}
+                    returnedBreedIds={returnedBreedIds}
+                    setReturnedBreedIds={setReturnedBreedIds}
+                    setNumberOfResults={setNumberOfResults}
+                  />
+                  <div className="page-container">
+                    <h2 className={browseHeader}>{totalResults === 0 ? alert : standard}</h2>
+                    <Browse
+                      dogs={dogs}
+                      selectedDogs={selectedDogs}
+                      setSelectedDogs={setSelectedDogs}
+                      match={''}
+                      x={false}
+                    />
+                    <Pagination
+                      onNext={onNext}
+                      onPrev={onPrev}
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      setCurrentPage={setCurrentPage}
+                    />
+                  </div>
+                </div>}
         </main>
       </Layout>
     </>

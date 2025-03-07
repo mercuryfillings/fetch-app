@@ -20,6 +20,7 @@ export const checkAuth = async (setIsLoggedIn: React.Dispatch<React.SetStateActi
 
 export const loginUser = async (myHeaders: Headers, formData: { name: string; email: string }, setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>) => {
     try {
+        console.log('not yet logged in')
         const response = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
             method: "POST",
             headers: myHeaders,
@@ -30,6 +31,7 @@ export const loginUser = async (myHeaders: Headers, formData: { name: string; em
             throw new Error(`Response status: ${response.status}`)
           }
         setIsLoggedIn(true)
+        console.log("logged in")
     } catch (error) {
         console.error('Login failed:', error)
         throw error

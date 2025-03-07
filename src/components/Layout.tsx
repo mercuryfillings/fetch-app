@@ -4,7 +4,7 @@ import FooterLogo from '../assets/FuzzBiz2.png'
 import { LayoutProps, HeaderProps } from "../types";
 import Banner from "./Banner"
 import Badge from "./Badge"
-import { useNavigate } from "react-router-dom"
+import { BrowserRouter, useNavigate, Link } from "react-router-dom"
 import { FaArrowRight } from "react-icons/fa"
 
 
@@ -21,9 +21,9 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogout, selectedDogs 
       </div>
       <div className='nav-container'>
         <ul className='nav-list'>
-            <li className='nav-list-item'><a className="nav-link" href="/about">About</a></li>
+            <li className='nav-list-item'><Link className="nav-link" to="/About">About</Link></li>
             <li className='nav-list-item'><a className="nav-link" href="https://github.com/mercuryfillings/fetch-app" target='_blank'>Repo</a></li>
-            <li className='nav-list-item'><a className="nav-link" href="/contact">Contact</a></li>
+            <li className='nav-list-item'><Link className="nav-link"to="/Contact">Contact</Link></li>
             {selectedDogs.length > 0 && <li className='nav-list-item'><Badge count={selectedDogs.length} selectedDogs={selectedDogs}/></li>}
             {isLoggedIn && (
               <li className='nav-list-item'><button onClick={handleLogout} className="logout-button">Log Out <FaArrowRight /></button></li>
